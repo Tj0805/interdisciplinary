@@ -84,8 +84,7 @@ public class GameController : MonoBehaviour
     }
 
     //executeing listeners
-    public void PickAPuzzle()
-    {
+    public void PickAPuzzle(){
         string name = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
 
         if (!firstGuess)
@@ -100,83 +99,63 @@ public class GameController : MonoBehaviour
 
 
         }
-        else if (!secondGuess)
-        {
+        else if (!secondGuess){
             secondGuess = true;
             secondGuessIndex = int.Parse(name);
             secondGuessPuzzle = gamePuzzles[secondGuessIndex].name;
-
             btns[secondGuessIndex].image.sprite = gamePuzzles[secondGuessIndex];
 
-            if (firstGuessPuzzle == secondGuessPuzzle)
-            {
-                Debug.Log("puzzles match");
+            if (firstGuessPuzzle == secondGuessPuzzle){
+               Debug.Log("puzzles match");
             }
-            else
-            {
+            else{
                 Debug.Log("puzzles dont match");
             }
-
             countGuess++;
-
             StartCoroutine(checkIfThePuzzlesMatch());
-
-
         }
 
     }
 
-    IEnumerator checkIfThePuzzlesMatch()
-    {
+    IEnumerator checkIfThePuzzlesMatch(){
         yield return new WaitForSeconds(1f);
         //if we guess correctly 
-        if (firstGuessPuzzle == secondGuessPuzzle)
-        {
-            yield return new WaitForSeconds(.5f);
-            //buttons wotn be touchable anymore
-            btns[firstGuessIndex].interactable = false;
-            btns[secondGuessIndex].interactable = false;
-
-            //we cant see the button anymore
-            btns[firstGuessIndex].image.color = new Color(0, 0, 0, 0);
-            btns[secondGuessIndex].image.color = new Color(0, 0, 0, 0);
-            checkIfGameIsFinished();
-
-        }
-        else
-        {
-            //flip tiles back if guess is round
-            //wait half a sec before turning  
-            yield return new WaitForSeconds(.5f);
-            btns[firstGuessIndex].image.sprite = bgImage;
-            btns[secondGuessIndex].image.sprite = bgImage;
-        }
-
+            if (firstGuessPuzzle == secondGuessPuzzle)
+            {
+                yield return new WaitForSeconds(.5f);
+                //buttons wotn be touchable anymore
+                btns[firstGuessIndex].interactable = false;
+                btns[secondGuessIndex].interactable = false;
+                //we cant see the button anymore
+                btns[firstGuessIndex].image.color = new Color(0, 0, 0, 0);
+                btns[secondGuessIndex].image.color = new Color(0, 0, 0, 0);
+                checkIfGameIsFinished();
+            }
+            else{
+                //flip tiles back if guess is round
+                //wait half a sec before turning  
+                yield return new WaitForSeconds(.5f);
+                btns[firstGuessIndex].image.sprite = bgImage;
+                btns[secondGuessIndex].image.sprite = bgImage;
+            }
         yield return new WaitForSeconds(.5f);
-
         firstGuess = secondGuess = false;
-
     }
-
-    void checkIfGameIsFinished()
-    {
+    void checkIfGameIsFinished(){
         CountCorectGuesses++;
         if (CountCorectGuesses == gameGuesses)
         {
             Debug.Log("GAmefinished");
             Debug.Log("it took yoo  " + countGuess + " guess to finsih the game");
-
         }
     }
     //randomixing the cards 
-    void  shuffle(List<Sprite> list){
-        for (int i=0;i<list.Count;i++) {
-
-            Sprite temp = list[i];
-            int randomIndex = Random.Range(i,list.Count);
-
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+        void shuffle(List<Sprite> list){
+            for (int i = 0; i < list.Count; i++){
+                Sprite temp = list[i];
+                int randomIndex = Random.Range(i, list.Count);
+                list[i] = list[randomIndex];
+                list[randomIndex] = temp;
+            }
         }
-    }
 }
