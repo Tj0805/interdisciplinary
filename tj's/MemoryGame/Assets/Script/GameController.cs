@@ -74,10 +74,8 @@ public class GameController : MonoBehaviour
     }
 
     //adding listerners
-    void AddListeners()
-    {
-        foreach (Button btn in btns)
-        {
+    void AddListeners(){
+        foreach (Button btn in btns){
             btn.onClick.AddListener(() => PickAPuzzle());
             flip();
         }
