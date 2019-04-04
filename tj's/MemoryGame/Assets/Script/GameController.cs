@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
         if (CountCorectGuesses == gameGuesses)
         {
             Debug.Log("GAmefinished");
-            Debug.Log("it took yoo  " + countGuess + " guess to finsih the game");
+            Debug.Log("it took you " + countGuess + " guess to finsih the game");
         }
     }
     //randomixing the cards 
