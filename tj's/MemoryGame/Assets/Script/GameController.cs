@@ -44,7 +44,6 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < objects.Length; i++)
         {
-
             btns.Add(objects[i].GetComponent<Button>());
             btns[i].image.sprite = bgImage;
         }
@@ -93,10 +92,9 @@ public class GameController : MonoBehaviour
             firstGuessPuzzle = gamePuzzles[firstGuessIndex].name;
 
             btns[firstGuessIndex].image.sprite = gamePuzzles[firstGuessIndex];
-
-
-
+            btns[firstGuessIndex].enabled=false;
         }
+
         else if (!secondGuess){
             secondGuess = true;
             secondGuessIndex = int.Parse(name);
@@ -108,11 +106,11 @@ public class GameController : MonoBehaviour
             }
             else{
                 Debug.Log("puzzles dont match");
+                btns[firstGuessIndex].enabled = true;
             }
             countGuess++;
             StartCoroutine(checkIfThePuzzlesMatch());
         }
-
     }
 
     IEnumerator checkIfThePuzzlesMatch(){
@@ -120,10 +118,10 @@ public class GameController : MonoBehaviour
         //if we guess correctly 
             if (firstGuessPuzzle == secondGuessPuzzle)
             {
-                yield return new WaitForSeconds(.5f);
-                //buttons wotn be touchable anymore
-                btns[firstGuessIndex].interactable = false;
-                btns[secondGuessIndex].interactable = false;
+                yield return new WaitForSeconds(.2f);
+                //buttons wont be touchable anymore
+                btns[firstGuessIndex].interactable = true;
+                btns[secondGuessIndex].interactable = true;
                 //we cant see the button anymore
                 btns[firstGuessIndex].image.color = new Color(0, 0, 0, 0);
                 btns[secondGuessIndex].image.color = new Color(0, 0, 0, 0);
@@ -132,11 +130,11 @@ public class GameController : MonoBehaviour
             else{
                 //flip tiles back if guess is round
                 //wait half a sec before turning  
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(.2f);
                 btns[firstGuessIndex].image.sprite = bgImage;
                 btns[secondGuessIndex].image.sprite = bgImage;
             }
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         firstGuess = secondGuess = false;
     }
     void checkIfGameIsFinished(){
