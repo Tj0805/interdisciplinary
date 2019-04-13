@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour
         AddGamePuzzles();
         gameGuesses = gamePuzzles.Count / 2;
         shuffle(gamePuzzles);
+
+
     }
     public void flip()
     {
@@ -46,6 +48,7 @@ public class GameController : MonoBehaviour
         {
             btns.Add(objects[i].GetComponent<Button>());
             btns[i].image.sprite = bgImage;
+
         }
 
     }
@@ -142,7 +145,30 @@ public class GameController : MonoBehaviour
         if (CountCorectGuesses == gameGuesses)
         {
             Debug.Log("GAmefinished");
-            Debug.Log("it took you " + countGuess + " guess to finsih the game");
+
+            if (countGuess == 8) {
+                Debug.Log("Your score is 100% Well done");
+                Debug.Log("it took you " + countGuess + " guess to finsih the game");
+            }
+            else if (countGuess > 8 || countGuess < 10) {
+                Debug.Log("Your score is 90% Well done");
+                Debug.Log("it took you " + countGuess + " guess to finsih the game");
+            }
+            else if (countGuess > 10 || countGuess < 12) {
+                Debug.Log("Your score is 80% Well done");
+                Debug.Log("it took you " + countGuess + " guess to finsih the game");
+            }
+            else if (countGuess >- 12|| countGuess < 14)
+            {
+                Debug.Log("Your score is 30% Well done");
+                Debug.Log("it took you " + countGuess + " guess to finsih the game");
+            }
+            else if (countGuess >= 15|| countGuess < 19)
+            {
+                Debug.Log("Your score is 20% Well done");
+                Debug.Log("it took you " + countGuess + " guess to finsih the game");
+            }
+
         }
     }
     //randomixing the cards 
